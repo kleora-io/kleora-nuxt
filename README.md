@@ -1,6 +1,6 @@
 # kleora-nuxt
 
-The official Kleora SDK package `@kleora/nuxt` (https://kleora.io).
+The official Kleora SDK package `@kleora-io/nuxt` (https://kleora.io).
 
 This repository is being set up. `0.0.0` is an empty placeholder that reserves the package name; the first real release is `0.1.0`.
 
