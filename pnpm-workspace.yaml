@@ -1,0 +1,8 @@
+# A single package, not a workspace: this file only carries pnpm settings.
+# Build scripts are opt-in; nuxt-module-build and vitest need esbuild's.
+allowBuilds:
+  esbuild: true
+# Kleora's own packages are installed as soon as they are released, rather
+# than after pnpm's minimum release age: this module tracks @kleora-io/browser.
+minimumReleaseAgeExclude:
+  - '@kleora-io/*'
