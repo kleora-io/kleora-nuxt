@@ -1,14 +1,15 @@
 # Publishes this package to npm through trusted publishing: no token exists
-# anywhere. The package's trusted publisher on npmjs.com names this repository
-# and this file (`release.yml`). The job runs in the environment `npm`, which
-# requires a maintainer's approval and accepts only `main`.
+# anywhere. The package's trusted publisher on npmjs.com names this
+# repository and this file (`release.yml`). The job runs in the environment
+# `npm`, which requires a maintainer's approval and accepts only `main`.
 #
 # npm's requirements for trusted publishing: a GitHub-hosted runner, npm CLI
-# 11.5.1 or newer, Node 22.14 or newer, and `id-token: write`. Provenance is
-# attached automatically because this repository is public.
+# 11.5.1 or newer, Node 22.14 or newer, and `id-token: write`.
 #
 # The version published is whatever `package.json` says; npm refuses a version
-# that already exists, so bump it before running this.
+# that already exists, so bump it before running this. The package is
+# installed from the committed lockfile, tested and built here before it is
+# published.
 name: Release
 
 on:
@@ -25,11 +26,20 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+        with:
+          run_install: false
       - uses: actions/setup-node@v5
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - name: npm 11.5.1 or newer
         run: npm install -g npm@latest && npm --version
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Test
+        run: pnpm test
+      - name: Build
+        run: pnpm build
       - name: Publish
-        run: npm publish --access public
+        run: npm publish --provenance --access public

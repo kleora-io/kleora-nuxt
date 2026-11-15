@@ -1,0 +1,25 @@
+{
+  // Standalone — there is no Nuxt app here to
+  // delegate to. Runtime code imports Nuxt's composables from `nuxt/app`
+  // rather than the `#app` alias precisely so that this plain `vue-tsc` run
+  // resolves them without a playground application to generate `.nuxt/`.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": false,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "test/**/*.ts", "*.config.ts"]
+}
